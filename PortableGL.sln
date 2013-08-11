@@ -5,6 +5,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PortableGL.SDL", "PortableG
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PortableGL", "PortableGL\PortableGL.csproj", "{8C271551-9F6D-4657-965E-2D321698048C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PortableGL.OpenTK", "PortableGL.OpenTK\PortableGL.OpenTK.csproj", "{E41C0646-FA26-4154-9EEE-4EA3689B0B7B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,6 +21,10 @@ Global
 		{8C271551-9F6D-4657-965E-2D321698048C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8C271551-9F6D-4657-965E-2D321698048C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8C271551-9F6D-4657-965E-2D321698048C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E41C0646-FA26-4154-9EEE-4EA3689B0B7B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E41C0646-FA26-4154-9EEE-4EA3689B0B7B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E41C0646-FA26-4154-9EEE-4EA3689B0B7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E41C0646-FA26-4154-9EEE-4EA3689B0B7B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = PortableGL.SDL\PortableGL.SDL.csproj
