@@ -380,7 +380,7 @@ namespace PortableGL
 		public abstract void glGenRenderbuffers(int n, IntPtr renderbuffers);
 		public abstract void glGenTextures(int n, IntPtr textures);
 		public abstract void glGenerateMipmap(int target);
-		public abstract void glGetboolv(int pname, IntPtr parameters);
+		public abstract void glGetBooleanv(int pname, IntPtr parameters);
 		public abstract void glGetFloatv(int pname, IntPtr parameters);
 		public abstract void glGetIntegerv(int pname, IntPtr parameters);
 		public abstract void glGetActiveAttrib(int program, int index, int bufSize, IntPtr length, IntPtr size, IntPtr type, System.Text.StringBuilder name);

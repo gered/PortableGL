@@ -275,7 +275,7 @@ namespace PortableGL.SDL
 			GL.GenerateMipmap((GenerateMipmapTarget)target);
 		}
 
-		public override unsafe void glGetboolv(int pname, IntPtr parameters)
+		public override unsafe void glGetBooleanv(int pname, IntPtr parameters)
 		{
 			GL.GetBoolean((GetPName)pname, (bool*)parameters);
 		}
