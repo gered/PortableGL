@@ -24,3 +24,4 @@ of the OpenGL methods (such as using specific enums for certain parameters).
 
 * Mobile backends: Xamarin.Android, Xamarin.iOS
 * Add additional method overloads to PortableGL to make it easier to pass arrays of data, out parameters, etc instead of needing to use pointers all the time
+* See about removing the intermediate OpenTK layer in SDL2-CS to remove one layer of indirection. Would we be able to do this on mobile platforms too ... ?
