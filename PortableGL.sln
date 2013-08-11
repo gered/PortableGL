@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PortableGL.SDL", "PortableGL.SDL\PortableGL.SDL.csproj", "{18DBD03F-D276-421D-BF64-EC2DB40BFDCD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PortableGL", "PortableGL\PortableGL.csproj", "{8C271551-9F6D-4657-965E-2D321698048C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{18DBD03F-D276-421D-BF64-EC2DB40BFDCD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{18DBD03F-D276-421D-BF64-EC2DB40BFDCD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{18DBD03F-D276-421D-BF64-EC2DB40BFDCD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{18DBD03F-D276-421D-BF64-EC2DB40BFDCD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8C271551-9F6D-4657-965E-2D321698048C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8C271551-9F6D-4657-965E-2D321698048C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8C271551-9F6D-4657-965E-2D321698048C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8C271551-9F6D-4657-965E-2D321698048C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = PortableGL.SDL\PortableGL.SDL.csproj
+	EndGlobalSection
+EndGlobal
