@@ -758,6 +758,14 @@ namespace PortableGL
 				glVertexAttrib4fv(index, new IntPtr((long)ptr));
 			}
 		}
+
+		public unsafe void glVertexAttribPointer<T>(int index, int size, int type, bool normalized, int stride, T[] pointer) where T : struct
+		{
+			fixed (void *ptr = pointer)
+			{
+				glVertexAttribPointer(index, size, type, normalized, stride, new IntPtr((long)ptr));
+			}
+		}
 	}
 }
 
