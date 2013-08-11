@@ -222,7 +222,7 @@ namespace PortableGL
 		{
 			int length = 0;
 			glGetProgramiv(program, GL_ACTIVE_ATTRIBUTE_MAX_LENGTH, ref length);
-			StringBuilder sb = new StringBuilder(length == 0 ? 1 : length * 2);
+			StringBuilder sb = new StringBuilder(length == 0 ? 1 : length);
 			glGetActiveAttrib(program, index, sb.Capacity, out length, out size, out type, sb);
 			return sb.ToString();
 		}
@@ -244,7 +244,7 @@ namespace PortableGL
 		{
 			int length = 0;
 			glGetProgramiv(program, GL_ACTIVE_UNIFORM_MAX_LENGTH, ref length);
-			StringBuilder sb = new StringBuilder(length == 0 ? 1 : length * 2);
+			StringBuilder sb = new StringBuilder(length == 0 ? 1 : length);
 			glGetActiveUniform(program, index, sb.Capacity, out length, out size, out type, sb);
 			return sb.ToString();
 		}
@@ -290,7 +290,7 @@ namespace PortableGL
 			glGetProgramiv(program, GL_INFO_LOG_LENGTH, ref length);
 			if (length == 0)
 				return String.Empty;
-			StringBuilder sb = new StringBuilder(length * 2);
+			StringBuilder sb = new StringBuilder(length);
 			glGetProgramInfoLog(program, sb.Capacity, out length, sb);
 			return sb.ToString();
 		}
@@ -334,7 +334,7 @@ namespace PortableGL
 			glGetShaderiv(shader, GL_INFO_LOG_LENGTH, ref length);
 			if (length == 0)
 				return String.Empty;
-			StringBuilder sb = new StringBuilder(length * 2);
+			StringBuilder sb = new StringBuilder(length);
 			glGetShaderInfoLog(shader, sb.Capacity, out length, sb);
 			return sb.ToString();
 		}
@@ -364,7 +364,7 @@ namespace PortableGL
 			glGetShaderiv(shader, GL_SHADER_SOURCE_LENGTH, ref length);
 			if (length == 0)
 				return String.Empty;
-			StringBuilder sb = new StringBuilder(length * 2);
+			StringBuilder sb = new StringBuilder(length);
 			glGetShaderSource(shader, sb.Capacity, out length, sb);
 			return sb.ToString();
 		}
