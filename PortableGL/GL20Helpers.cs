@@ -1,4 +1,5 @@
 using System;
+using System.Text;
 
 namespace PortableGL
 {
@@ -44,9 +45,25 @@ namespace PortableGL
 			}
 		}
 
+		public unsafe void glDeleteBuffers(int n, ref int buffers)
+		{
+			fixed (void* ptr = &buffers)
+			{
+				glDeleteBuffers(n, new IntPtr((long)ptr));
+			}
+		}
+
 		public unsafe void glDeleteFramebuffers(int n, int[] framebuffers)
 		{
 			fixed (void* ptr = framebuffers)
+			{
+				glDeleteFramebuffers(n, new IntPtr((long)ptr));
+			}
+		}
+
+		public unsafe void glDeleteFramebuffers(int n, ref int framebuffers)
+		{
+			fixed (void* ptr = &framebuffers)
 			{
 				glDeleteFramebuffers(n, new IntPtr((long)ptr));
 			}
@@ -60,9 +77,25 @@ namespace PortableGL
 			}
 		}
 
+		public unsafe void glDeleteRenderbuffers(int n, ref int renderbuffers)
+		{
+			fixed (void* ptr = &renderbuffers)
+			{
+				glDeleteRenderbuffers(n, new IntPtr((long)ptr));
+			}
+		}
+
 		public unsafe void glDeleteTextures(int n, int[] textures)
 		{
 			fixed (void* ptr = textures)
+			{
+				glDeleteTextures(n, new IntPtr((long)ptr));
+			}
+		}
+
+		public unsafe void glDeleteTextures(int n, ref int textures)
+		{
+			fixed (void* ptr = &textures)
 			{
 				glDeleteTextures(n, new IntPtr((long)ptr));
 			}
@@ -84,9 +117,25 @@ namespace PortableGL
 			}
 		}
 
+		public unsafe void glGenBuffers(int n, ref int buffers)
+		{
+			fixed (void *ptr = &buffers)
+			{
+				glGenBuffers(n, new IntPtr((long)ptr));
+			}
+		}
+
 		public unsafe void glGenFramebuffers(int n, int[] framebuffers)
 		{
 			fixed (void *ptr = framebuffers)
+			{
+				glGenFramebuffers(n, new IntPtr((long)ptr));
+			}
+		}
+
+		public unsafe void glGenFramebuffers(int n, ref int framebuffers)
+		{
+			fixed (void *ptr = &framebuffers)
 			{
 				glGenFramebuffers(n, new IntPtr((long)ptr));
 			}
@@ -100,9 +149,25 @@ namespace PortableGL
 			}
 		}
 
+		public unsafe void glGenRenderbuffers(int n, ref int renderbuffers)
+		{
+			fixed (void *ptr = &renderbuffers)
+			{
+				glGenRenderbuffers(n, new IntPtr((long)ptr));
+			}
+		}
+
 		public unsafe void glGenTextures(int n, int[] textures)
 		{
 			fixed (void *ptr = textures)
+			{
+				glGenTextures(n, new IntPtr((long)ptr));
+			}
+		}
+
+		public unsafe void glGenTextures(int n, ref int textures)
+		{
+			fixed (void *ptr = &textures)
 			{
 				glGenTextures(n, new IntPtr((long)ptr));
 			}
@@ -124,6 +189,14 @@ namespace PortableGL
 			}
 		}
 
+		public unsafe void glGetFloatv(int pname, ref float parameters)
+		{
+			fixed (void *ptr = &parameters)
+			{
+				glGetFloatv(pname, new IntPtr((long)ptr));
+			}
+		}
+
 		public unsafe void glGetIntegerv(int pname, int[] parameters)
 		{
 			fixed (void *ptr = parameters)
@@ -132,30 +205,48 @@ namespace PortableGL
 			}
 		}
 
-		public unsafe void glGetActiveAttrib(int program, int index, int bufSize, out int length, out int size, out int type, System.Text.StringBuilder name)
+		public unsafe void glGetActiveAttrib(int program, int index, int bufSize, out int length, out int size, out int type, StringBuilder name)
 		{
 			fixed (int* lengthPtr = &length,
 			       sizePtr = &size,
 			       typePtr = &type)
 			{
-				glGetActiveAttrib(program, index, bufSize, new IntPtr((int)lengthPtr), new IntPtr((int)sizePtr), new IntPtr((int)typePtr), name);
+				glGetActiveAttrib(program, index, bufSize, new IntPtr((long)lengthPtr), new IntPtr((long)sizePtr), new IntPtr((long)typePtr), name);
 				length = *lengthPtr;
 				size = *sizePtr;
 				type = *typePtr;
 			}
 		}
 
-		public unsafe void glGetActiveUniform(int program, int index, int bufSize, out int length, out int size, out int type, System.Text.StringBuilder name)
+		public string glGetActiveAttrib(int program, int index, out int size, out int type)
+		{
+			int length = 0;
+			glGetProgramiv(program, GL_ACTIVE_ATTRIBUTE_MAX_LENGTH, ref length);
+			StringBuilder sb = new StringBuilder(length == 0 ? 1 : length * 2);
+			glGetActiveAttrib(program, index, sb.Capacity, out length, out size, out type, sb);
+			return sb.ToString();
+		}
+
+		public unsafe void glGetActiveUniform(int program, int index, int bufSize, out int length, out int size, out int type, StringBuilder name)
 		{
 			fixed (int* lengthPtr = &length,
 			       sizePtr = &size,
 			       typePtr = &type)
 			{
-				glGetActiveUniform(program, index, bufSize, new IntPtr((int)lengthPtr), new IntPtr((int)sizePtr), new IntPtr((int)typePtr), name);
+				glGetActiveUniform(program, index, bufSize, new IntPtr((long)lengthPtr), new IntPtr((long)sizePtr), new IntPtr((long)typePtr), name);
 				length = *lengthPtr;
 				size = *sizePtr;
 				type = *typePtr;
 			}
+		}
+
+		public string glGetActiveUniform(int program, int index, out int size, out int type)
+		{
+			int length = 0;
+			glGetProgramiv(program, GL_ACTIVE_UNIFORM_MAX_LENGTH, ref length);
+			StringBuilder sb = new StringBuilder(length == 0 ? 1 : length * 2);
+			glGetActiveUniform(program, index, sb.Capacity, out length, out size, out type, sb);
+			return sb.ToString();
 		}
 
 		public unsafe void glGetAttachedShaders(int program, int maxCount, out int count, int[] shaders)
@@ -163,7 +254,7 @@ namespace PortableGL
 			fixed (int* countPtr = &count,
 			       shadersPtr = shaders)
 			{
-				glGetAttachedShaders(program, maxCount, new IntPtr((int)countPtr), new IntPtr((int)shadersPtr));
+				glGetAttachedShaders(program, maxCount, new IntPtr((long)countPtr), new IntPtr((long)shadersPtr));
 				count = *countPtr;
 			}
 		}
@@ -184,7 +275,7 @@ namespace PortableGL
 			}
 		}
 
-		public unsafe void glGetProgramInfoLog(int program, int maxLength, out int length, System.Text.StringBuilder infoLog)
+		public unsafe void glGetProgramInfoLog(int program, int maxLength, out int length, StringBuilder infoLog)
 		{
 			fixed (int* lengthPtr = &length)
 			{
@@ -193,9 +284,28 @@ namespace PortableGL
 			}
 		}
 
+		public string glGetProgramInfoLog(int program)
+		{
+			int length = 0;
+			glGetProgramiv(program, GL_INFO_LOG_LENGTH, ref length);
+			if (length == 0)
+				return String.Empty;
+			StringBuilder sb = new StringBuilder(length * 2);
+			glGetProgramInfoLog(program, sb.Capacity, out length, sb);
+			return sb.ToString();
+		}
+
 		public unsafe void glGetProgramiv(int program, int pname, int[] parameters)
 		{
 			fixed (void *ptr = parameters)
+			{
+				glGetProgramiv(program, pname, new IntPtr((long)ptr));
+			}
+		}
+
+		public unsafe void glGetProgramiv(int program, int pname, ref int parameters)
+		{
+			fixed (void *ptr = &parameters)
 			{
 				glGetProgramiv(program, pname, new IntPtr((long)ptr));
 			}
@@ -209,13 +319,24 @@ namespace PortableGL
 			}
 		}
 
-		public unsafe void glGetShaderInfoLog(int shader, int maxLength, out int length, System.Text.StringBuilder infoLog)
+		public unsafe void glGetShaderInfoLog(int shader, int maxLength, out int length, StringBuilder infoLog)
 		{
 			fixed (int* lengthPtr = &length)
 			{
 				glGetShaderInfoLog(shader, maxLength, new IntPtr((long)lengthPtr), infoLog);
 				length = *lengthPtr;
 			}
+		}
+
+		public string glGetShaderInfoLog(int shader)
+		{
+			int length = 0;
+			glGetShaderiv(shader, GL_INFO_LOG_LENGTH, ref length);
+			if (length == 0)
+				return String.Empty;
+			StringBuilder sb = new StringBuilder(length * 2);
+			glGetShaderInfoLog(shader, sb.Capacity, out length, sb);
+			return sb.ToString();
 		}
 
 		public unsafe void glGetShaderPrecisionFormat(int shaderType, int precisionType, int[] range, out int precision)
@@ -228,7 +349,7 @@ namespace PortableGL
 			}
 		}
 
-		public unsafe void glGetShaderSource(int shader, int maxLength, out int length, System.Text.StringBuilder source)
+		public unsafe void glGetShaderSource(int shader, int maxLength, out int length, StringBuilder source)
 		{
 			fixed (int* lengthPtr = &length)
 			{
@@ -237,9 +358,28 @@ namespace PortableGL
 			}
 		}
 
+		public string glGetShaderSource(int shader)
+		{
+			int length = 0;
+			glGetShaderiv(shader, GL_SHADER_SOURCE_LENGTH, ref length);
+			if (length == 0)
+				return String.Empty;
+			StringBuilder sb = new StringBuilder(length * 2);
+			glGetShaderSource(shader, sb.Capacity, out length, sb);
+			return sb.ToString();
+		}
+
 		public unsafe void glGetShaderiv(int shader, int pname, int[] parameters)
 		{
 			fixed (void *ptr = parameters)
+			{
+				glGetShaderiv(shader, pname, new IntPtr((long)ptr));
+			}
+		}
+
+		public unsafe void glGetShaderiv(int shader, int pname, ref int parameters)
+		{
+			fixed (void *ptr = &parameters)
 			{
 				glGetShaderiv(shader, pname, new IntPtr((long)ptr));
 			}
@@ -253,9 +393,25 @@ namespace PortableGL
 			}
 		}
 
+		public unsafe void glGetTexParameterfv(int target, int pname, ref float parameters)
+		{
+			fixed (void *ptr = &parameters)
+			{
+				glGetTexParameterfv(target, pname, new IntPtr((long)ptr));
+			}
+		}
+
 		public unsafe void glGetTexParameteriv(int target, int pname, int[] parameters)
 		{
 			fixed (void *ptr = parameters)
+			{
+				glGetTexParameteriv(target, pname, new IntPtr((long)ptr));
+			}
+		}
+
+		public unsafe void glGetTexParameteriv(int target, int pname, ref int parameters)
+		{
+			fixed (void *ptr = &parameters)
 			{
 				glGetTexParameteriv(target, pname, new IntPtr((long)ptr));
 			}
@@ -269,9 +425,25 @@ namespace PortableGL
 			}
 		}
 
+		public unsafe void glGetUniformfv(int program, int location, ref float parameters)
+		{
+			fixed (void *ptr = &parameters)
+			{
+				glGetUniformfv(program, location, new IntPtr((long)ptr));
+			}
+		}
+
 		public unsafe void glGetUniformiv(int program, int location, int[] parameters)
 		{
 			fixed (void *ptr = parameters)
+			{
+				glGetUniformiv(program, location, new IntPtr((long)ptr));
+			}
+		}
+
+		public unsafe void glGetUniformiv(int program, int location, ref int parameters)
+		{
+			fixed (void *ptr = &parameters)
 			{
 				glGetUniformiv(program, location, new IntPtr((long)ptr));
 			}
@@ -285,9 +457,25 @@ namespace PortableGL
 			}
 		}
 
+		public unsafe void glGetVertexAttribfv(int index, int pname, ref float parameters)
+		{
+			fixed (void *ptr = &parameters)
+			{
+				glGetVertexAttribfv(index, pname, new IntPtr((long)ptr));
+			}
+		}
+
 		public unsafe void glGetVertexAttribiv(int index, int pname, int[] parameters)
 		{
 			fixed (void *ptr = parameters)
+			{
+				glGetVertexAttribiv(index, pname, new IntPtr((long)ptr));
+			}
+		}
+
+		public unsafe void glGetVertexAttribiv(int index, int pname, ref int parameters)
+		{
+			fixed (void *ptr = &parameters)
 			{
 				glGetVertexAttribiv(index, pname, new IntPtr((long)ptr));
 			}
@@ -316,6 +504,11 @@ namespace PortableGL
 			{
 				glShaderSource(shader, count, str, new IntPtr((long)ptr));
 			}
+		}
+
+		public void glShaderSource(int shader, string str)
+		{
+			glShaderSource(shader, 1, new string[] { str }, new int[] { str.Length });
 		}
 
 		public unsafe void glTexImage2D<T>(int target, int level, int internalformat, int width, int height, int border, int format, int type, T[] data) where T : struct
@@ -374,9 +567,25 @@ namespace PortableGL
 			}
 		}
 
+		public unsafe void glUniform2fv(int location, int count, ref float value)
+		{
+			fixed (void *ptr = &value)
+			{
+				glUniform2fv(location, count, new IntPtr((long)ptr));
+			}
+		}
+
 		public unsafe void glUniform2iv(int location, int count, int[] value)
 		{
 			fixed (void *ptr = value)
+			{
+				glUniform2iv(location, count, new IntPtr((long)ptr));
+			}
+		}
+
+		public unsafe void glUniform2iv(int location, int count, ref int value)
+		{
+			fixed (void *ptr = &value)
 			{
 				glUniform2iv(location, count, new IntPtr((long)ptr));
 			}
@@ -390,9 +599,25 @@ namespace PortableGL
 			}
 		}
 
+		public unsafe void glUniform3fv(int location, int count, ref float value)
+		{
+			fixed (void *ptr = &value)
+			{
+				glUniform3fv(location, count, new IntPtr((long)ptr));
+			}
+		}
+
 		public unsafe void glUniform3iv(int location, int count, int[] value)
 		{
 			fixed (void *ptr = value)
+			{
+				glUniform3iv(location, count, new IntPtr((long)ptr));
+			}
+		}
+
+		public unsafe void glUniform3iv(int location, int count, ref int value)
+		{
+			fixed (void *ptr = &value)
 			{
 				glUniform3iv(location, count, new IntPtr((long)ptr));
 			}
@@ -406,9 +631,25 @@ namespace PortableGL
 			}
 		}
 
+		public unsafe void glUniform4fv(int location, int count, ref float value)
+		{
+			fixed (void *ptr = &value)
+			{
+				glUniform4fv(location, count, new IntPtr((long)ptr));
+			}
+		}
+
 		public unsafe void glUniform4iv(int location, int count, int[] value)
 		{
 			fixed (void *ptr = value)
+			{
+				glUniform4iv(location, count, new IntPtr((long)ptr));
+			}
+		}
+
+		public unsafe void glUniform4iv(int location, int count, ref int value)
+		{
+			fixed (void *ptr = &value)
 			{
 				glUniform4iv(location, count, new IntPtr((long)ptr));
 			}
@@ -422,6 +663,14 @@ namespace PortableGL
 			}
 		}
 
+		public unsafe void glUniformMatrix2fv(int location, int count, bool transpose, ref float value)
+		{
+			fixed (void *ptr = &value)
+			{
+				glUniformMatrix2fv(location, count, transpose, new IntPtr((long)ptr));
+			}
+		}
+
 		public unsafe void glUniformMatrix3fv(int location, int count, bool transpose, float[] value)
 		{
 			fixed (void *ptr = value)
@@ -430,9 +679,25 @@ namespace PortableGL
 			}
 		}
 
+		public unsafe void glUniformMatrix3fv(int location, int count, bool transpose, ref float value)
+		{
+			fixed (void *ptr = &value)
+			{
+				glUniformMatrix3fv(location, count, transpose, new IntPtr((long)ptr));
+			}
+		}
+
 		public unsafe void glUniformMatrix4fv(int location, int count, bool transpose, float[] value)
 		{
 			fixed (void *ptr = value)
+			{
+				glUniformMatrix4fv(location, count, transpose, new IntPtr((long)ptr));
+			}
+		}
+
+		public unsafe void glUniformMatrix4fv(int location, int count, bool transpose, ref float value)
+		{
+			fixed (void *ptr = &value)
 			{
 				glUniformMatrix4fv(location, count, transpose, new IntPtr((long)ptr));
 			}
@@ -454,6 +719,14 @@ namespace PortableGL
 			}
 		}
 
+		public unsafe void glVertexAttrib2fv(int index, ref float v)
+		{
+			fixed (void *ptr = &v)
+			{
+				glVertexAttrib2fv(index, new IntPtr((long)ptr));
+			}
+		}
+
 		public unsafe void glVertexAttrib3fv(int index, float[] v)
 		{
 			fixed (void *ptr = v)
@@ -462,9 +735,25 @@ namespace PortableGL
 			}
 		}
 
+		public unsafe void glVertexAttrib3fv(int index, ref float v)
+		{
+			fixed (void *ptr = &v)
+			{
+				glVertexAttrib3fv(index, new IntPtr((long)ptr));
+			}
+		}
+
 		public unsafe void glVertexAttrib4fv(int index, float[] v)
 		{
 			fixed (void *ptr = v)
+			{
+				glVertexAttrib4fv(index, new IntPtr((long)ptr));
+			}
+		}
+
+		public unsafe void glVertexAttrib4fv(int index, ref float v)
+		{
+			fixed (void *ptr = &v)
 			{
 				glVertexAttrib4fv(index, new IntPtr((long)ptr));
 			}
