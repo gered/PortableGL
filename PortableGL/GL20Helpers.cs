@@ -53,11 +53,6 @@ namespace PortableGL
 			}
 		}
 
-		public void glDeleteBuffers(int buffer)
-		{
-			glDeleteBuffers(1, ref buffer);
-		}
-
 		public unsafe void glDeleteFramebuffers(int n, int[] framebuffers)
 		{
 			fixed (void* ptr = framebuffers)
@@ -72,11 +67,6 @@ namespace PortableGL
 			{
 				glDeleteFramebuffers(n, new IntPtr((long)ptr));
 			}
-		}
-
-		public void glDeleteFramebuffers(int framebuffer)
-		{
-			glDeleteFramebuffers(1, ref framebuffer);
 		}
 
 		public unsafe void glDeleteRenderbuffers(int n, int[] renderbuffers)
@@ -95,11 +85,6 @@ namespace PortableGL
 			}
 		}
 
-		public void glDeleteRenderbuffers(int renderbuffer)
-		{
-			glDeleteRenderbuffers(1, ref renderbuffer);
-		}
-
 		public unsafe void glDeleteTextures(int n, int[] textures)
 		{
 			fixed (void* ptr = textures)
@@ -114,11 +99,6 @@ namespace PortableGL
 			{
 				glDeleteTextures(n, new IntPtr((long)ptr));
 			}
-		}
-
-		public void glDeleteTextures(int texture)
-		{
-			glDeleteTextures(1, ref texture);
 		}
 
 		public unsafe void glDrawElements<T>(int mode, int count, int type, T[] indices) where T : struct
@@ -145,13 +125,6 @@ namespace PortableGL
 			}
 		}
 
-		public int glGenBuffers()
-		{
-			int buffer = 0;
-			glGenBuffers(1, ref buffer);
-			return buffer;
-		}
-
 		public unsafe void glGenFramebuffers(int n, int[] framebuffers)
 		{
 			fixed (void *ptr = framebuffers)
@@ -166,13 +139,6 @@ namespace PortableGL
 			{
 				glGenFramebuffers(n, new IntPtr((long)ptr));
 			}
-		}
-
-		public int glGenFramebuffers()
-		{
-			int framebuffer = 0;
-			glGenFramebuffers(1, ref framebuffer);
-			return framebuffer;
 		}
 
 		public unsafe void glGenRenderbuffers(int n, int[] renderbuffers)
@@ -191,13 +157,6 @@ namespace PortableGL
 			}
 		}
 
-		public int glGenRenderbuffers()
-		{
-			int renderbuffer = 0;
-			glGenRenderbuffers(1, ref renderbuffer);
-			return renderbuffer;
-		}
-
 		public unsafe void glGenTextures(int n, int[] textures)
 		{
 			fixed (void *ptr = textures)
@@ -212,13 +171,6 @@ namespace PortableGL
 			{
 				glGenTextures(n, new IntPtr((long)ptr));
 			}
-		}
-
-		public int glGenTextures()
-		{
-			int texture = 0;
-			glGenTextures(1, ref texture);
-			return texture;
 		}
 
 		public unsafe void glGetBooleanv(int pname, bool[] parameters)
@@ -266,14 +218,6 @@ namespace PortableGL
 			}
 		}
 
-		public string glGetActiveAttrib(int program, int index, out int size, out int type)
-		{
-			int length = glGetProgramiv(program, GL_ACTIVE_ATTRIBUTE_MAX_LENGTH);
-			StringBuilder sb = new StringBuilder(length == 0 ? 1 : length);
-			glGetActiveAttrib(program, index, sb.Capacity, out length, out size, out type, sb);
-			return sb.ToString();
-		}
-
 		public unsafe void glGetActiveUniform(int program, int index, int bufSize, out int length, out int size, out int type, StringBuilder name)
 		{
 			fixed (int* lengthPtr = &length,
@@ -285,14 +229,6 @@ namespace PortableGL
 				size = *sizePtr;
 				type = *typePtr;
 			}
-		}
-
-		public string glGetActiveUniform(int program, int index, out int size, out int type)
-		{
-			int length = glGetProgramiv(program, GL_ACTIVE_UNIFORM_MAX_LENGTH);
-			StringBuilder sb = new StringBuilder(length == 0 ? 1 : length);
-			glGetActiveUniform(program, index, sb.Capacity, out length, out size, out type, sb);
-			return sb.ToString();
 		}
 
 		public unsafe void glGetAttachedShaders(int program, int maxCount, out int count, int[] shaders)
@@ -330,16 +266,6 @@ namespace PortableGL
 			}
 		}
 
-		public string glGetProgramInfoLog(int program)
-		{
-			int length = glGetProgramiv(program, GL_INFO_LOG_LENGTH);
-			if (length == 0)
-				return String.Empty;
-			StringBuilder sb = new StringBuilder(length);
-			glGetProgramInfoLog(program, sb.Capacity, out length, sb);
-			return sb.ToString();
-		}
-
 		public unsafe void glGetProgramiv(int program, int pname, int[] parameters)
 		{
 			fixed (void *ptr = parameters)
@@ -354,13 +280,6 @@ namespace PortableGL
 			{
 				glGetProgramiv(program, pname, new IntPtr((long)ptr));
 			}
-		}
-
-		public int glGetProgramiv(int shader, int pname)
-		{
-			int parameter = 0;
-			glGetProgramiv(shader, pname, ref parameter);
-			return parameter;
 		}
 
 		public unsafe void glGetRenderbufferParameteriv(int target, int pname, int[] parameters)
@@ -378,16 +297,6 @@ namespace PortableGL
 				glGetShaderInfoLog(shader, maxLength, new IntPtr((long)lengthPtr), infoLog);
 				length = *lengthPtr;
 			}
-		}
-
-		public string glGetShaderInfoLog(int shader)
-		{
-			int length = glGetShaderiv(shader, GL_INFO_LOG_LENGTH);
-			if (length == 0)
-				return String.Empty;
-			StringBuilder sb = new StringBuilder(length);
-			glGetShaderInfoLog(shader, sb.Capacity, out length, sb);
-			return sb.ToString();
 		}
 
 		public unsafe void glGetShaderPrecisionFormat(int shaderType, int precisionType, int[] range, out int precision)
@@ -409,16 +318,6 @@ namespace PortableGL
 			}
 		}
 
-		public string glGetShaderSource(int shader)
-		{
-			int length = glGetShaderiv(shader, GL_SHADER_SOURCE_LENGTH);
-			if (length == 0)
-				return String.Empty;
-			StringBuilder sb = new StringBuilder(length);
-			glGetShaderSource(shader, sb.Capacity, out length, sb);
-			return sb.ToString();
-		}
-
 		public unsafe void glGetShaderiv(int shader, int pname, int[] parameters)
 		{
 			fixed (void *ptr = parameters)
@@ -433,13 +332,6 @@ namespace PortableGL
 			{
 				glGetShaderiv(shader, pname, new IntPtr((long)ptr));
 			}
-		}
-
-		public int glGetShaderiv(int shader, int pname)
-		{
-			int parameter = 0;
-			glGetShaderiv(shader, pname, ref parameter);
-			return parameter;
 		}
 
 		public unsafe void glGetTexParameterfv(int target, int pname, float[] parameters)
@@ -458,13 +350,6 @@ namespace PortableGL
 			}
 		}
 
-		public float glGetTexParameterfv(int target, int pname)
-		{
-			float parameter = 0.0f;
-			glGetTexParameterfv(target, pname, ref parameter);
-			return parameter;
-		}
-
 		public unsafe void glGetTexParameteriv(int target, int pname, int[] parameters)
 		{
 			fixed (void *ptr = parameters)
@@ -479,13 +364,6 @@ namespace PortableGL
 			{
 				glGetTexParameteriv(target, pname, new IntPtr((long)ptr));
 			}
-		}
-
-		public int glGetTexParameteriv(int target, int pname)
-		{
-			int parameter = 0;
-			glGetTexParameteriv(target, pname, ref parameter);
-			return parameter;
 		}
 
 		public unsafe void glGetUniformfv(int program, int location, float[] parameters)
@@ -575,11 +453,6 @@ namespace PortableGL
 			{
 				glShaderSource(shader, count, str, new IntPtr((long)ptr));
 			}
-		}
-
-		public void glShaderSource(int shader, string str)
-		{
-			glShaderSource(shader, 1, new string[] { str }, new int[] { str.Length });
 		}
 
 		public unsafe void glTexImage2D<T>(int target, int level, int internalformat, int width, int height, int border, int format, int type, T[] data) where T : struct
