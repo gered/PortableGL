@@ -3,6 +3,13 @@ using System.Text;
 
 namespace PortableGL
 {
+	// This is where "convenience" overloads for commonly used OpenGL functions
+	// can go. The intention here is to provide ways to reduce some repetitive
+	// code on the caller-side. These overloads will not exactly match the
+	// OpenGL ES 2.0 spec obviously.
+	//
+	// Overloads here should really be kept to a bare minimum!
+
 	public abstract partial class GL20
 	{
 		public void glDeleteBuffers(int buffer)

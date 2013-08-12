@@ -2,6 +2,8 @@ using System;
 
 namespace PortableGL
 {
+	// This should only include declarations for standard OpenGL ES 2.0 functions and constant values.
+
 	public abstract partial class GL20
 	{
 		#region Constants

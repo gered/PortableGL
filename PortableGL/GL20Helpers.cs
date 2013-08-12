@@ -3,6 +3,12 @@ using System.Text;
 
 namespace PortableGL
 {
+	// This should only contain method overloads for standard OpenGL functions
+	// which take pointer(s) as arguments. These overloads should simply provide
+	// the caller with "simpler" alternatives to use if they wish to avoid using
+	// unsafe code themselves directly. This should really only be stuff like
+	// using "out" parameters and arrays instead of equivalent pointer arguments.
+
 	public abstract partial class GL20
 	{
 		public unsafe void glBufferData<T>(int target, int size, T[] data, int usage) where T : struct
