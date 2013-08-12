@@ -2,7 +2,12 @@ using System;
 
 namespace PortableGL
 {
-	// This should only include declarations for standard OpenGL ES 2.0 functions and constant values.
+	// This should only include declarations for standard OpenGL ES 2.0 
+	// functions and constant values.
+	//
+	// The intention is that platform/OS backends will only need to implement
+	// these methods. Helper method overloads will simple use these methods,
+	// so they only need to be implemented once.
 
 	public abstract partial class GL20
 	{
