@@ -60,6 +60,27 @@ namespace PortableGL
 			return texture;
 		}
 
+		public bool glGetBoolean(int pname)
+		{
+			bool parameter = false;
+			glGetBooleanv(pname, ref parameter);
+			return parameter;
+		}
+
+		public float glGetFloat(int pname)
+		{
+			float parameter = 0.0f;
+			glGetFloatv(pname, ref parameter);
+			return parameter;
+		}
+
+		public int glGetInteger(int pname)
+		{
+			int parameter = 0;
+			glGetIntegerv(pname, ref parameter);
+			return parameter;
+		}
+
 		public string glGetActiveAttrib(int program, int index, out int size, out int type)
 		{
 			int length = glGetProgramiv(program, GL_ACTIVE_ATTRIBUTE_MAX_LENGTH);

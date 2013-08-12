@@ -187,6 +187,14 @@ namespace PortableGL
 			}
 		}
 
+		public unsafe void glGetBooleanv(int pname, ref bool parameters)
+		{
+			fixed (void *ptr = &parameters)
+			{
+				glGetBooleanv(pname, new IntPtr((long)ptr));
+			}
+		}
+
 		public unsafe void glGetFloatv(int pname, float[] parameters)
 		{
 			fixed (void *ptr = parameters)
@@ -206,6 +214,14 @@ namespace PortableGL
 		public unsafe void glGetIntegerv(int pname, int[] parameters)
 		{
 			fixed (void *ptr = parameters)
+			{
+				glGetIntegerv(pname, new IntPtr((long)ptr));
+			}
+		}
+
+		public unsafe void glGetIntegerv(int pname, ref int parameters)
+		{
+			fixed (void *ptr = &parameters)
 			{
 				glGetIntegerv(pname, new IntPtr((long)ptr));
 			}
