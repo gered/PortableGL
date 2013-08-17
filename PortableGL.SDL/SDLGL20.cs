@@ -1,10 +1,20 @@
 using System;
+using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;
 
 namespace PortableGL.SDL
 {
 	public class SDLGL20 : GL20
 	{
+		public SDLGL20(IntPtr glContext)
+		{
+			if (glContext == IntPtr.Zero)
+				throw new ArgumentNullException("glContext");
+
+			GraphicsContext.CurrentContext = glContext;
+			GL.LoadAll();
+		}
+
 		public override void glActiveTexture(int texture)
 		{
 			GL.ActiveTexture((TextureUnit)texture);
